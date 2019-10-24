@@ -11,8 +11,6 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-
-
     public function signUpForm()
     {
         return view('register.signUp');
@@ -41,6 +39,17 @@ class UserController extends Controller
             auth()->login($kullanici);
             return redirect()->route('signUpSuccess');
     }
+
+    public function terms()
+    {
+        return view('terms');
+    }
+
+    public function signUpSuccess()
+    {
+        return view('signUpSuccess');
+    }
+
     public function activate($key)
     {
         $kullanici = User::where('activate_key', $key)->first();
@@ -51,6 +60,31 @@ class UserController extends Controller
             $kullanici->save();
             return redirect()->to('/')->with('message', 'Kullanıcı Kaydınız Akttif Olarak Etkinleştirildi.')
                 ->with('message_type', 'success');
+        }
+
+    }
+
+    public function signInForm()
+    {
+        return view('login.signIn');
+
+    }
+    
+    public function signIn()
+    {
+        $this->validate(request(), [
+            'email'      =>  'required|email',
+            'password'  =>  'required'
+        ]);
+        if (auth()->attempt(['email' => request('email'), 'password' => request('password')], request()->has('rememberMe')))
+        {
+            request()->session()->regenerate();
+            return redirect()->intended('/');
+        }
+        else
+        {
+            $errors = [ 'email' => 'Hatalı Giriş'];
+            return back()->withErrors($errors);
         }
     }
 }

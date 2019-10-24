@@ -22,28 +22,34 @@
         <!-- <img src="images/signup-bg.jpg" alt=""> -->
         <div class="container">
             <div class="signup-content">
-                <h2 class="form-title">
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                </h2>
-                <form method="POST" id="signup-form" class="signup-form" action="{{ route('register.signUp') }}">
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form method="POST" id="signup-form" class="signup-form" action="{{ route('login.signIn') }}">
                     @csrf
                     <h2 class="form-title">Sign In</h2>
                     <div class="form-group">
-                        <input type="email" class="form-input" name="email" id="email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z.]{2,5}$" placeholder="Your Email"/>
+                        <input type="email" class="form-input" name="email" id="email"  placeholder="Your Email"/>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-input" name="password" id="password" placeholder="Password"/>
                         <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                     </div>
                     <div class="form-group">
+                        <input type="checkbox" name="rememberMe" id="rememberMe" class="agree-term" />
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>Remember Me</label>
+                    </div>
+                    <div class="form-group">
                         <label for="agree-term" class="label-agree-term"><span><span></span></span>  <a href="{{route('register.signUp')}}" class="term-service">Create New Account</a><a href="#" class="term-service" style="text-decoration: none;"> OR </a><a href="#" class="term-service">Forget Password</a></label>
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign In" disabled="disabled" />
+                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign In"  />
                     </div>
                 </form>
             </div>
