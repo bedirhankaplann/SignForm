@@ -22,6 +22,7 @@ class CreateKullaniciTable extends Migration
             $table->string('identityNo',11)->unique();
             $table->string('activate_key', 60)->nullable();
             $table->boolean('activate_status')->default(0);
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

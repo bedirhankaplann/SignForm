@@ -11,6 +11,7 @@
 |
 */
 Route::get('/', 'HomepageController@index')->name('homepage');
+Route::get('/homepage', 'UserController@homepage')->name('homepage');
 Route::get('/test/mail', function ()
 {
     $kullanici = \App\Models\User::find(1);
@@ -26,4 +27,5 @@ Route::group(['prefix' => '/'], function ()
     Route::get('/user/activate/{key}', 'UserController@activate')->name('activate');
     Route::get('/login', 'UserController@signInForm')->name('login.signIn');
     Route::post('/login', 'UserController@signIn');
+    Route::get('/homepage', 'UserController@homepage')->name('homepage');
 });

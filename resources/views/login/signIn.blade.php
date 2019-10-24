@@ -35,10 +35,10 @@
                     @csrf
                     <h2 class="form-title">Sign In</h2>
                     <div class="form-group">
-                        <input type="email" class="form-input" name="email" id="email"  placeholder="Your Email"/>
+                        <input type="email" class="form-input" name="email" id="email"  placeholder="Your Email" required/>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-input" name="password" id="password" placeholder="Password"/>
+                        <input type="password" class="form-input" name="password" id="password" placeholder="Password" required/>
                         <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                     </div>
                     <div class="form-group">
@@ -61,14 +61,6 @@
 <!-- JS -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="js/main.js"></script>
-<script>
-    $('#agree-term').click(function() {
-        if ($('#submit').is(':disabled')) {
-            $('#submit').removeAttr('disabled');
-        } else {
-            $('#submit').attr('disabled', 'disabled');
-        }
-    });
-</script>
+
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

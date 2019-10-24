@@ -69,7 +69,7 @@ class UserController extends Controller
         return view('login.signIn');
 
     }
-    
+
     public function signIn()
     {
         $this->validate(request(), [
@@ -79,12 +79,16 @@ class UserController extends Controller
         if (auth()->attempt(['email' => request('email'), 'password' => request('password')], request()->has('rememberMe')))
         {
             request()->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/homepage');
         }
         else
         {
             $errors = [ 'email' => 'Hatalı Giriş'];
             return back()->withErrors($errors);
         }
+    }
+    public function homepage()
+    {
+        return view('homepage');
     }
 }
