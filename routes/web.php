@@ -14,10 +14,16 @@ Route::get('/', 'HomepageController@index')->name('homepage');
 Route::get('/success', 'SignUpController@index')->name('signUpSuccess');
 Route::get('/login', 'SignInController@index')->name('login.signIn');
 Route::get('/terms', 'TermsController@index')->name('terms');
+Route::get('/test/mail', function ()
+{
+    $kullanici = \App\Models\User::find(1);
+    return new App\Mail\UserRegisterMail($kullanici);
+});
+Route::get('/user/activate/{key}', 'UserController@activate')->name('awsd');
 
 
 Route::group(['prefix' => '/'], function ()
 {
-    Route::get('/signUp', 'KullaniciController@signUpForm')->name('register.signUp');
-    Route::post('/signUp', 'KullaniciController@SignUp');
+    Route::get('/signUp', 'UserController@signUpForm')->name('register.signUp');
+    Route::post('/signUp', 'UserController@SignUp');
 });

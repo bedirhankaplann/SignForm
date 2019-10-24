@@ -20,14 +20,16 @@
     <section class="signup">
         <!-- <img src="images/signup-bg.jpg" alt=""> -->
         <div class="container">
-            <div class="signup-content">
-                <h2 class="form-title">
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                </h2>
+            <div class="signup-content ">
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form method="POST" id="signup-form" class="signup-form" action="{{ route('register.signUp') }}">
                     @csrf
                     <h2 class="form-title">Create account</h2>
@@ -41,11 +43,11 @@
                         <input type="number" class="form-input" name="identityNo" id="identityNo"  maxlength="11" placeholder="ID Card Number"/>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-input" name="password" id="password" placeholder="Password"/>
+                        <input type="password" class="form-input" name="password" id="password" placeholder="Password" required/>
                         <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password"/>
+                        <input type="password" id="re_password" class="form-input" name="password_confirmation"  placeholder="Repeat your password"/>
                     </div>
                     <div class="form-group">
                         <input type="checkbox" name="agree-term" value="checked" id="agree-term" class="agree-term" />
